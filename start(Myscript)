@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MyScript : MonoBehaviour
+{
+    public Transform cubeTransform;
+    public Vector3 destinationPosition;
+    // Start is called before the first frame update
+    void Start()
+    {
+        cubeTransform.position = destinationPosition;
+        Debug.Log("this is called from start");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Debug.Log("This is called from Update");
+    } 
+}
+
