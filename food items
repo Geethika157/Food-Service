@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Fooditem : MonoBehaviour
+{
+    public FoodType foodItemType;
+    // Start is called before the first frame update
+}
+public enum FoodType
+{
+    Dal,
+    Fry,
+    Curry,
+    Rice,
+    PizzaBase,
+    PizzaToppins,
+    Coke
+}
