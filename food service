@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class serving : MonoBehaviour
+{
+    public FoodReceiver currFoodReceiver;
+    public GameObject dropLocation;
+    public Camera rayEmittingCamera;
+    public Fooditem currentSelectedFoodItem;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GetReceiver();
+        FoodRayCasting();
+        DropItem();
+    }
+    public void FoodRayCasting()
+    {
+        if(Input.GetMouseButtonDown(0))//to check whether user is clicking or not
+        {
+            Ray foodCollisionDetection = rayEmittingCamera.ScreenPointToRay(Input.mousePosition);// checks the ray pointing to object when mouse is clicked
+            RaycastHit hit;
+            if(Physics.Raycast(foodCollisionDetection, out hit))
+            {
+                if(hit.collider.tag=="Fooditem")
+                {
+                    Debug.Log("Collided with food item");
+                    
+                    currentSelectedFoodItem = hit.collider.GetComponent<Fooditem>();
+                }
+            }
+        }
+    }
+    public void GetReceiver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = rayEmittingCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.CompareTag("Foodreceiver"))
+                {
+                    currFoodReceiver = hit.collider.GetComponent<FoodReceiver>();
+                }
+            }
+        }
+    }
+
+    public void DropItem()
+    {
+        if (currentSelectedFoodItem == null || currFoodReceiver == null)
+            return;
+        if (Input.GetMouseButtonDown(0))
+        {
+            currFoodReceiver.DropItem(currentSelectedFoodItem.foodItemType);
+        }
+    }
+
+}
