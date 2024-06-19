@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class player : MonoBehaviour
+{
+    // Start is called before the first frame update
+    public Transform playerTransform;
+    public float mouseXSensitivity;
+    public float mouseYSensitivity;
+    public float verticalrotation;
+    public float clampvalue;
+    public float minRotation;
+    public float maxRotation;
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        cam_rot();
+    }
+    public void cam_rot()
+    {
+        float horizontal = Input.GetAxis("Mouse X") * mouseXSensitivity;
+        float vertical = Input.GetAxis("Mouse Y") * mouseYSensitivity;
+        Vector3 dir = new Vector3(-vertical, horizontal, 0);
+        //playerTransform is the object to rotate
+        playerTransform.Rotate(dir);
+        verticalrotation = playerTransform.localEulerAngles.x;
+        if (verticalrotation > 180)
+        {
+            clampvalue = verticalrotation - 360;
+        }
+        else
+        {
+            clampvalue = verticalrotation;
+        }
+        clampvalue = Mathf.Clamp(clampvalue, minRotation, maxRotation);
+        playerTransform.eulerAngles = new Vector3(clampvalue, playerTransform.eulerAngles.y, 0);
+
+    }
+}
