@@ -1,0 +1,83 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FoodReceiver : MonoBehaviour
+{
+    public FoodMenuType foodType;
+    public FoodData foodData;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void DropItem(FoodType itemType)
+    {
+        switch(foodType)
+        {
+            case FoodMenuType.DalRiceFry:
+                switch(itemType)
+                {
+                    case FoodType.Rice:
+                        foodData.Rice.SetActive(true);
+                        break;
+                    case FoodType.Fry:
+                        foodData.fry.SetActive(true);
+                        break;
+                    case FoodType.Dal:
+                        foodData.dal.SetActive(true);
+                        break;
+                }
+                break;
+            case FoodMenuType.DalandFry:
+                switch(itemType)
+                {
+                    case FoodType.Dal:
+                        break;
+                    case FoodType.Fry:
+                        break;
+                }
+                break;
+            case FoodMenuType.FryandRice:
+                break;
+            case FoodMenuType.CurryandRice:
+                break;
+            case FoodMenuType.Pizza:
+                switch(itemType)
+                {
+
+                }
+                break;
+        }
+    }
+    
+}
+public enum FoodMenuType
+{
+    DalRiceFry,
+    DalandFry,
+    FryandRice,
+    CurryandRice,
+    Pizza,
+    DalPizzaCurry
+}
+[Serializable]
+public class FoodData
+{
+    public FoodMenuType menuType;
+    public GameObject Rice;
+    public GameObject dal;
+    public GameObject Curry;
+    public GameObject fry;
+    public GameObject pizzaBase;
+    public GameObject pizzaToppins;
+    public GameObject coke;
+
+}
